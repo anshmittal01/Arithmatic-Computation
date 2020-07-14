@@ -1,5 +1,23 @@
 
 #! /bin/bash
+bubblesortasc() {
+	local -n array=$1
+        for ((idx1=0;idx1<=${#array[@]}-1;idx1++))
+        do
+                for((idx2=0;idx2<${#array[@]}-idx1-1;idx2++))
+                do
+			if [ ${array[idx2]} -gt ${array[$((idx2+1))]} ] 
+        		then
+            			temp=${array[idx2]}
+            			array[$idx2]=${array[$((idx2+1))]}
+            			array[$((idx2+1))]=$temp
+        		fi
+                done
+        done
+	echo ${array[@]}
+}
+
+
 bubblesortdsc() {
 	local -n array=$1
         for ((idx1=0;idx1<=${#array[@]}-1;idx1++))
@@ -56,3 +74,5 @@ done
 echo "${results[@]}"
 echo "Sorting in descending order"
 bubblesortdsc results
+echo "Sorting in ascending order"
+bubblesortasc results
