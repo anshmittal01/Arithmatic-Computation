@@ -20,6 +20,12 @@ result4=$(( num1%num2+num3 ))
 
 declare -A compute
 compute=( ["a+b*c"]=$result1 ["a*b+c"]=$result2 ["c+a/b"]=$result3 ["a%b+c"]=$result4 )
-#echo "${compute[@]}"
 
 print_dict "$(declare -p compute)"
+index=0
+for value in ${compute[@]}
+do
+        results[$index]=$value
+	(( index++ ))
+done
+echo "${results[@]}"
