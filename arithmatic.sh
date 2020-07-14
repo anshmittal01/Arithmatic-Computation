@@ -1,5 +1,30 @@
 
 #! /bin/bash
+bubblesortdsc() {
+	local -n array=$1
+        for ((idx1=0;idx1<=${#array[@]}-1;idx1++))
+        do
+                for((idx2=0;idx2<${#array[@]}-idx1-1;idx2++))
+                do
+			if [ ${array[idx2]} -lt ${array[$((idx2+1))]} ] 
+        		then
+            			temp=${array[idx2]}
+            			array[$idx2]=${array[$((idx2+1))]}
+            			array[$((idx2+1))]=$temp
+        		fi
+                done
+        done
+	echo ${array[@]}
+	print_array array
+}
+
+print_array () {
+        local -n array
+        for value in ${array[@]}
+        do
+                echo -n "$value "
+        done
+}
 
 print_dict () {
         eval "declare -A dict="${1#*=}
@@ -29,3 +54,5 @@ do
 	(( index++ ))
 done
 echo "${results[@]}"
+echo "Sorting in descending order"
+bubblesortdsc results
